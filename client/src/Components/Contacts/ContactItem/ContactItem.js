@@ -5,10 +5,17 @@ import ContactContext from "../../../Context/Contact/contactContext";
 const ContactItem = ({ contact }) => {
 	const contactContext = useContext(ContactContext);
 
+	const {
+		deleteContact,
+		setCurrentContact,
+		clearCurrentContact,
+	} = contactContext;
+
 	const { id, name, email, phone, type } = contact;
 
 	const deleteContactHandler = _ => {
-		contactContext.deleteContact(id);
+		deleteContact(id);
+		clearCurrentContact();
 	};
 
 	return (
@@ -19,7 +26,9 @@ const ContactItem = ({ contact }) => {
 					style={{ float: "right" }}
 					className={
 						"badge " +
-						(type === "professional" ? "badge-success" : "badge-primary")
+						(type === "professional"
+							? "badge-success"
+							: "badge-primary")
 					}
 				>
 					{type.charAt(0).toUpperCase() + type.slice(1)}
@@ -38,7 +47,12 @@ const ContactItem = ({ contact }) => {
 				)}
 			</ul>
 			<p>
-				<button className="btn btn-dark btn-sm">Edit</button>
+				<button
+					className="btn btn-dark btn-sm"
+					onClick={() => setCurrentContact(contact)}
+				>
+					Edit
+				</button>
 				<button
 					className="btn btn-danger btn-sm"
 					onClick={deleteContactHandler}
