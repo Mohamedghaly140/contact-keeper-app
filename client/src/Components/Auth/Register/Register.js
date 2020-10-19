@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AlertContext from "../../../Context/Alert/alertContext";
 
 const Register = props => {
+	const alertContext = useContext(AlertContext);
+
+	const { setAlert } = alertContext;
+
 	const [user, setUser] = useState({
 		name: "",
 		email: "",
@@ -16,6 +21,15 @@ const Register = props => {
 
 	const submitRegisterHandler = event => {
 		event.preventDefault();
+		if (name === "" || email === "" || password === "") {
+			setAlert("Please enter all fields", "danger");
+		} else if (password !== confirmPassword) {
+			setAlert("Passwords does not match", "danger");
+		} else if (password.length < 6 && confirmPassword.length < 6) {
+			setAlert("Password min length 6 charactars", "danger");
+		} else {
+			console.log("Register Submited");
+		}
 	};
 
 	return (
@@ -54,7 +68,7 @@ const Register = props => {
 				<div className="form-group">
 					<label htmlFor="confirmPassword">Confirm Password</label>
 					<input
-						type="confirmPassword"
+						type="password"
 						name="confirmPassword"
 						value={confirmPassword}
 						onChange={registerHandler}
