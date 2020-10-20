@@ -11,10 +11,10 @@ const ContactItem = ({ contact }) => {
 		clearCurrentContact,
 	} = contactContext;
 
-	const { id, name, email, phone, type } = contact;
+	const { _id, name, email, phone, type } = contact;
 
-	const deleteContactHandler = _ => {
-		deleteContact(id);
+	const deleteContactHandler = () => {
+		deleteContact(_id);
 		clearCurrentContact();
 	};
 
