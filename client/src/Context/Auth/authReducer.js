@@ -50,7 +50,7 @@ export default (state, action) => {
 				...state,
 				token: null,
 				isAuth: null,
-				loading: true,
+				loading: false,
 				user: null,
 				error: null,
 			};

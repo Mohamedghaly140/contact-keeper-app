@@ -2,24 +2,28 @@ import React, { Fragment, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../../Context/Auth/authContext";
+import ContactContext from "../../../Context/Contact/contactContext";
 
 const Navbar = ({ title, icon }) => {
 	const authContext = useContext(AuthContext);
+	const contactContext = useContext(ContactContext);
 
 	const { logout, isAuth, user } = authContext;
+	const { clearContacts } = contactContext;
 
 	const onLogoutHandler = () => {
 		logout();
+		clearContacts();
 	};
 
 	const authLinks = (
 		<Fragment>
-			<li>| Hello {user && user.name}</li>
+			<li> Hello {user && user.name}</li>
 			<li>
-				<a href="#!" onClick={onLogoutHandler}>
+				<button style={btnStyle} onClick={onLogoutHandler}>
 					<i className="fas fa-sign-in-alt" />{" "}
 					<span className="hide-sm">Logout</span>
-				</a>
+				</button>
 			</li>
 		</Fragment>
 	);
@@ -41,11 +45,6 @@ const Navbar = ({ title, icon }) => {
 				<i className={icon} /> {title}
 			</h1>
 			<ul>
-				{isAuth && (
-					<li>
-						<Link to="/">Home</Link>
-					</li>
-				)}
 				<li>
 					<Link to="/about">About</Link>
 				</li>
@@ -63,6 +62,15 @@ Navbar.propTypes = {
 Navbar.defaultProps = {
 	title: "Contact Keeper",
 	icon: "fas fa-id-card-alt",
+};
+
+const btnStyle = {
+	background: "none",
+	border: "none",
+	paddingLeft: "12px",
+	color: "#fff",
+	cursor: "pointer",
+	outline: "none",
 };
 
 export default Navbar;
