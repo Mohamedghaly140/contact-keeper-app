@@ -3,18 +3,24 @@ import AlertContext from "../../../Context/Alert/alertContext";
 import AuthContext from "../../../Context/Auth/authContext";
 
 const Register = props => {
+	const { history } = props;
 	const alertContext = useContext(AlertContext);
 	const authContext = useContext(AuthContext);
 
 	const { setAlert } = alertContext;
-	const { register, error, clearErrors } = authContext;
+	const { register, error, clearErrors, isAuth } = authContext;
 
 	useEffect(() => {
+		if (isAuth) {
+			history.push("/");
+		}
+
 		if (error) {
 			setAlert(error, "danger");
 			clearErrors();
 		}
-	}, [error]);
+		// eslint-disable-next-line
+	}, [error, isAuth, history]);
 
 	const [user, setUser] = useState({
 		name: "",
