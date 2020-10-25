@@ -37,7 +37,6 @@ const ContactState = props => {
 				type: CONTACT_ERROR,
 				error: err.response.data.msg,
 			});
-			console.log(err.response.data.msg);
 		}
 	};
 
@@ -59,7 +58,7 @@ const ContactState = props => {
 		} catch (err) {
 			dispatch({
 				type: CONTACT_ERROR,
-				error:err.response.data.msg,
+				error: err.response.data.msg,
 			});
 		}
 	};
