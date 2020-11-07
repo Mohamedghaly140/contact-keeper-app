@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
-import ContactContext from './contactContext';
-import contactReducer from './contactReducer';
+import React, { useReducer } from "react";
+import axios from "axios";
+import ContactContext from "./contactContext";
+import contactReducer from "./contactReducer";
 import {
 	GET_CONTACTS,
 	CLEAR_CONTACTS,
@@ -13,7 +13,7 @@ import {
 	FILTER_CONTACTS,
 	CLEAR_FILTER,
 	CONTACT_ERROR,
-} from '../types';
+} from "../types";
 
 const ContactState = props => {
 	const initialState = {
@@ -29,16 +29,14 @@ const ContactState = props => {
 	// Get Contacts
 	const getContacts = async () => {
 		try {
-			const res = await axios.get('/api/contacts');
+			const res = await axios.get("/api/contacts");
 
 			dispatch({ type: GET_CONTACTS, contacts: res.data });
 		} catch (err) {
-			if (err.response.data.msg) {
-				dispatch({
-					type: CONTACT_ERROR,
-					error: err.response.data.msg,
-				});
-			}
+			dispatch({
+				type: CONTACT_ERROR,
+				error: err.response.data.msg,
+			});
 		}
 	};
 
@@ -46,24 +44,22 @@ const ContactState = props => {
 	const addContact = async contact => {
 		const config = {
 			header: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 		};
 
 		try {
-			const res = await axios.post('/api/contacts', contact, config);
+			const res = await axios.post("/api/contacts", contact, config);
 
 			dispatch({
 				type: ADD_CONTACT,
 				payload: res.data,
 			});
 		} catch (err) {
-			if (err.response.data.msg) {
-				dispatch({
-					type: CONTACT_ERROR,
-					error: err.response.data.msg,
-				});
-			}
+			dispatch({
+				type: CONTACT_ERROR,
+				error: err.response.data.msg,
+			});
 		}
 	};
 
@@ -74,12 +70,10 @@ const ContactState = props => {
 
 			dispatch({ type: DELETE_CONTACT, contactId: id });
 		} catch (err) {
-			if (err.response.data.msg) {
-				dispatch({
-					type: CONTACT_ERROR,
-					error: err.response.data.msg,
-				});
-			}
+			dispatch({
+				type: CONTACT_ERROR,
+				error: err.response.data.msg,
+			});
 		}
 	};
 
@@ -102,7 +96,7 @@ const ContactState = props => {
 	const updateContact = async contact => {
 		const config = {
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 		};
 
@@ -115,12 +109,10 @@ const ContactState = props => {
 
 			dispatch({ type: UPDATE_CONTACT, contact: res.data });
 		} catch (err) {
-			if (err.response.data.msg) {
-				dispatch({
-					type: CONTACT_ERROR,
-					error: err.response.data.msg,
-				});
-			}
+			dispatch({
+				type: CONTACT_ERROR,
+				error: err.response.data.msg,
+			});
 		}
 	};
 
