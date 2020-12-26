@@ -29,7 +29,7 @@ const ContactState = props => {
 	// Get Contacts
 	const getContacts = async () => {
 		try {
-			const res = await axios.get("/api/contacts");
+			const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/contacts`);
 
 			dispatch({ type: GET_CONTACTS, contacts: res.data });
 		} catch (err) {
@@ -49,7 +49,7 @@ const ContactState = props => {
 		};
 
 		try {
-			const res = await axios.post("/api/contacts", contact, config);
+			const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/contacts`, contact, config);
 
 			dispatch({
 				type: ADD_CONTACT,
@@ -66,7 +66,7 @@ const ContactState = props => {
 	// Delete Contact
 	const deleteContact = async id => {
 		try {
-			await axios.delete(`/api/contacts/${id}`);
+			await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${id}`);
 
 			dispatch({ type: DELETE_CONTACT, contactId: id });
 		} catch (err) {
@@ -102,7 +102,7 @@ const ContactState = props => {
 
 		try {
 			const res = await axios.put(
-				`/api/contacts/${contact._id}`,
+				`${process.env.REACT_APP_BACKEND_URL}/api/contacts/${contact._id}`,
 				contact,
 				config
 			);
