@@ -37,7 +37,7 @@ const ContactState = props => {
 		} catch (err) {
 			dispatch({
 				type: CONTACT_ERROR,
-				error: err.msg,
+				error: err.respone.data.msg,
 			});
 		}
 	};
@@ -64,7 +64,7 @@ const ContactState = props => {
 		} catch (err) {
 			dispatch({
 				type: CONTACT_ERROR,
-				error: err.msg,
+				error: err.respone.data.msg,
 			});
 		}
 	};
@@ -80,7 +80,7 @@ const ContactState = props => {
 		} catch (err) {
 			dispatch({
 				type: CONTACT_ERROR,
-				error: err.msg,
+				error: err.respone.data.msg,
 			});
 		}
 	};
@@ -119,7 +119,7 @@ const ContactState = props => {
 		} catch (err) {
 			dispatch({
 				type: CONTACT_ERROR,
-				error: err.msg,
+				error: err.respone.data.msg,
 			});
 		}
 	};

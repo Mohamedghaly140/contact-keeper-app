@@ -38,7 +38,7 @@ const AuthState = props => {
 
 			dispatch({ type: USER_LOADED, payload: res.data });
 		} catch (err) {
-			dispatch({ type: AUTH_ERROR, error: err.msg });
+			dispatch({ type: AUTH_ERROR, error: err.respone.data.msg });
 		}
 	};
 
@@ -66,7 +66,7 @@ const AuthState = props => {
 		} catch (err) {
 			dispatch({
 				type: REGISTER_FAIL,
-				error: err.msg,
+				error: err.respone.data.msg,
 			});
 		}
 	};
@@ -95,7 +95,7 @@ const AuthState = props => {
 		} catch (err) {
 			dispatch({
 				type: LOGIN_FAIL,
-				error: err.msg,
+				error: err.respone.data.msg,
 			});
 		}
 	};
