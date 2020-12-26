@@ -1,8 +1,8 @@
-import React, { useReducer } from "react";
-import axios from "axios";
-import AuthContext from "./authContext";
-import authReducer from "./authReducer";
-import setAuthToken from "../../Utils/setAuthToken";
+import React, { useReducer } from 'react';
+import axios from 'axios';
+import AuthContext from './authContext';
+import authReducer from './authReducer';
+import setAuthToken from '../../Utils/setAuthToken';
 import {
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
@@ -12,11 +12,11 @@ import {
 	LOGIN_FAIL,
 	LOGOUT,
 	CLEAR_ERRORS,
-} from "../types";
+} from '../types';
 
 const AuthState = props => {
 	const initialState = {
-		token: localStorage.getItem("token"),
+		token: localStorage.getItem('token'),
 		isAuth: null,
 		loading: true,
 		user: null,
@@ -32,11 +32,13 @@ const AuthState = props => {
 		}
 
 		try {
-			const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/auth`);
+			const res = await axios.get(
+				`${process.env.REACT_APP_BACKEND_URL}/api/auth`
+			);
 
 			dispatch({ type: USER_LOADED, payload: res.data });
 		} catch (err) {
-			dispatch({ type: AUTH_ERROR, error: err.response.data.msg });
+			dispatch({ type: AUTH_ERROR, error: err.msg });
 		}
 	};
 
@@ -44,12 +46,16 @@ const AuthState = props => {
 	const register = async formData => {
 		const config = {
 			header: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 		};
 
 		try {
-			const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, formData, config);
+			const res = await axios.post(
+				`${process.env.REACT_APP_BACKEND_URL}/api/users`,
+				formData,
+				config
+			);
 
 			dispatch({
 				type: REGISTER_SUCCESS,
@@ -60,7 +66,7 @@ const AuthState = props => {
 		} catch (err) {
 			dispatch({
 				type: REGISTER_FAIL,
-				error: err.response.data.msg,
+				error: err.msg,
 			});
 		}
 	};
@@ -69,12 +75,16 @@ const AuthState = props => {
 	const login = async formData => {
 		const config = {
 			header: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 		};
 
 		try {
-			const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth`, formData, config);
+			const res = await axios.post(
+				`${process.env.REACT_APP_BACKEND_URL}/api/auth`,
+				formData,
+				config
+			);
 
 			dispatch({
 				type: LOGIN_SUCCESS,
@@ -85,7 +95,7 @@ const AuthState = props => {
 		} catch (err) {
 			dispatch({
 				type: LOGIN_FAIL,
-				error: err.response.data.msg,
+				error: err.msg,
 			});
 		}
 	};
